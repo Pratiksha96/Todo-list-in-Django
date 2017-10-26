@@ -1,20 +1,13 @@
-<html>
-<head>
-    <title>To-do List</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-</head>
+{% extends 'app/base.html' %}
 
-<div>
-    <h1><a href="/">To-do List</a></h1>
-</div>
-
-{% for task in tasks %}
-    <div>
-        <h2><a href="">{{ task.title }}</a></h2>
-        <p>created: {{ task.created_date }}</p>
-        <p>{{ task.text|linebreaksbr }}</p>
-    </div>
-{% endfor %}
-
-</html>
+{% block content %}
+    {% for task in tasks %}
+        <div class="task">
+            <div class="date">
+                {{ task.created_date }}
+            </div>
+            <h1><a href="">{{ task.title }}</a></h1>
+            <p>{{ task.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
