@@ -33,8 +33,12 @@ def delete_task(request,task_id):
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Todo
-
+from django.shortcuts import render, get_object_or_404
 
 def todo_list(request):
     tasks = Todo.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request , 'app/todo_list.html' , {'tasks': tasks})
+
+def task_detail(request, pk):
+    task = get_object_or_404(task, pk=pk)
+    return render(request, 'app/task_detail.html', {'task': task})
