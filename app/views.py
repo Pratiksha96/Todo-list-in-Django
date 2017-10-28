@@ -70,3 +70,8 @@ def todo_edit(request, pk):
     else:
         form = TodoForm(instance=task)
     return render(request, 'app/todo_edit.html', {'form': form})
+
+def todo_remove(request, pk):
+    task = get_object_or_404(Todo, pk=pk)
+    task.delete()
+    return redirect('todo_list')
