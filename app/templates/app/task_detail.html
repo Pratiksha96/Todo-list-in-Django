@@ -4,7 +4,7 @@
     <div class="task">
         {% if task.created_date %}
             <div class="date">
-                {{ rask.created_date }}
+                {{ task.created_date }}
             </div>
         {% endif %}
         <a class="btn btn-default" href="{% url 'todo_edit' pk=task.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
