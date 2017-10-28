@@ -40,5 +40,5 @@ def todo_list(request):
     return render(request , 'app/todo_list.html' , {'tasks': tasks})
 
 def task_detail(request, pk):
-    task = get_object_or_404(task, pk=pk)
+    task = get_object_or_404(Todo, pk=pk)
     return render(request, 'app/task_detail.html', {'task': task})
