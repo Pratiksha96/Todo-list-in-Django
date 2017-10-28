@@ -3,10 +3,10 @@
 {% block content %}
     {% for task in tasks %}
         <div class="task">
+            <h2><a href="{% url 'task_detail' pk=task.pk %}">{{ task.title }}</a></h2>
             <div class="date">
                 {{ task.created_date }}
             </div>
-            <h1><a href="{% url 'task_detail' pk=task.pk %}">{{ task.title }}</a></h1>
             <!-- pk means primary key
             -->
             <p>{{ task.text|linebreaksbr }}</p>
