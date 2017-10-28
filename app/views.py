@@ -34,6 +34,9 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Todo
 from django.shortcuts import render, get_object_or_404
+from .forms import TodoForm
+from django.shortcuts import redirect
+
 
 def todo_list(request):
     tasks = Todo.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
@@ -42,3 +45,28 @@ def todo_list(request):
 def task_detail(request, pk):
     task = get_object_or_404(Todo, pk=pk)
     return render(request, 'app/task_detail.html', {'task': task})
+
+def todo_new(request):
+    if request.method == "POST":
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.created_date = timezone.now()
+            task.save()
+            return redirect('task_detail', pk=task.pk)
+    else:
+        form = TodoForm()
+    return render(request, 'app/todo_edit.html', {'form': form})
+
+def todo_edit(request, pk):
+    task = get_object_or_404(Todo, pk=pk)
+    if request.method == "POST":
+        form = TodoForm(request.POST, instance=task)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.created_date = timezone.now()
+            task.save()
+            return redirect('task_detail', pk=task.pk)
+    else:
+        form = TodoForm(instance=task)
+    return render(request, 'app/todo_edit.html', {'form': form})

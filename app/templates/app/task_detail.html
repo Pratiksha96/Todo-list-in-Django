@@ -7,6 +7,7 @@
                 {{ rask.created_date }}
             </div>
         {% endif %}
+        <a class="btn btn-default" href="{% url 'todo_edit' pk=task.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <h1>{{ task.title }}</h1>
         <p>{{ task.text|linebreaksbr }}</p>
     </div>
