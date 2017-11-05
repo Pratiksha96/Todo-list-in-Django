@@ -42,9 +42,9 @@ def todo_list(request):
     tasks = Todo.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request , 'app/todo_list.html' , {'tasks': tasks})
 
-def task_detail(request, pk):
+def todo_detail(request, pk):
     task = get_object_or_404(Todo, pk=pk)
-    return render(request, 'app/task_detail.html', {'task': task})
+    return render(request, 'app/todo_detail.html', {'task': task})
 
 def todo_new(request):
     if request.method == "POST":
@@ -53,7 +53,7 @@ def todo_new(request):
             task = form.save(commit=False)
             task.created_date = timezone.now()
             task.save()
-            return redirect('task_detail', pk=task.pk)
+            return redirect('todo_detail', pk=task.pk)
     else:
         form = TodoForm()
     return render(request, 'app/todo_edit.html', {'form': form})
@@ -66,7 +66,7 @@ def todo_edit(request, pk):
             task = form.save(commit=False)
             task.created_date = timezone.now()
             task.save()
-            return redirect('task_detail', pk=task.pk)
+            return redirect('todo_detail', pk=task.pk)
     else:
         form = TodoForm(instance=task)
     return render(request, 'app/todo_edit.html', {'form': form})

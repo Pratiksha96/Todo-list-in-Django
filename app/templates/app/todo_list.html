@@ -3,7 +3,7 @@
 
 </table>
 {% block content %}
-    
+    <div class="table">
     <table>
     <tr>
     <th>Title</th>
@@ -13,7 +13,7 @@
         {% for task in tasks %}
             <div class="task">
                 <tr>
-                    <td><a href="{% url 'task_detail' pk=task.pk %}">{{ task.title }}</a></td>
+                    <td><a href="{% url 'todo_detail' pk=task.pk %}">{{ task.title }}</a></td>
                     <td>{{ task.text|linebreaksbr }}</td>
                     <td>{{task.created_date|date:"d M Y"}} {{task.created_date|time:"h:i A"}}</td>
                     <td><a class="btn btn-default" href="{% url 'todo_edit' pk=task.pk %}">Edit</span></a></td>
@@ -21,5 +21,6 @@
                 </tr>
             </div>
             {% endfor %}
-    </table>    
+    </table>
+    </div>    
 {% endblock %}
