@@ -1,15 +1,25 @@
 {% extends 'app/base.html' %}
+<table>
 
+</table>
 {% block content %}
-    {% for task in tasks %}
-        <div class="task">
-            <h2><a href="{% url 'task_detail' pk=task.pk %}">{{ task.title }}</a></h2>
-            <div class="date">
-                {{ task.created_date }}
+    
+    <table>
+    <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date Created</th>
+    </tr>
+        {% for task in tasks %}
+            <div class="task">
+                <tr>
+                    <td><a href="{% url 'task_detail' pk=task.pk %}">{{ task.title }}</a></td>
+                    <td>{{ task.text|linebreaksbr }}</td>
+                    <td>{{task.created_date|date:"d M Y"}} {{task.created_date|time:"h:i A"}}</td>
+                    <td><a class="btn btn-default" href="{% url 'todo_edit' pk=task.pk %}">Edit</span></a></td>
+                    <td><a class="btn btn-default" href="{% url 'todo_remove' pk=task.pk %}">Delete</span></a></td>
+                </tr>
             </div>
-            <!-- pk means primary key
-            -->
-            <p>{{ task.text|linebreaksbr }}</p>
-        </div>
-    {% endfor %}
+            {% endfor %}
+    </table>    
 {% endblock %}

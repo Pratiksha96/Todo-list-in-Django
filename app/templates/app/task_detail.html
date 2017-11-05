@@ -7,8 +7,8 @@
                 {{ task.created_date }}
             </div>
         {% endif %}
-        <a class="btn btn-default" href="{% url 'todo_edit' pk=task.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        <a class="btn btn-default" href="{% url 'todo_remove' pk=task.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a class="btn btn-default" href="{% url 'todo_edit' pk=task.pk %}">Edit</span></a>|
+        <a class="btn btn-default" href="{% url 'todo_remove' pk=task.pk %}">Delete</span></a>
         <h1>{{ task.title }}</h1>
         <p>{{ task.text|linebreaksbr }}</p>
     </div>
