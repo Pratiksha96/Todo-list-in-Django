@@ -134,6 +134,9 @@ LOGOUT_URL = 'logout'
 
 LOGIN_REDIRECT_URL = '/'
 
+SOCIAL_AUTH_FACEBOOK_KEY = '818841551651742'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '09ba0c4a457a1e8202a93a1536233707'  # App Secret
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
