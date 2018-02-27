@@ -34,9 +34,31 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Todo
 from django.shortcuts import render, get_object_or_404
-from .forms import TodoForm
+from .forms import TodoForm , UserRegistrationForm
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
 
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            userObj = form.cleaned_data
+            username = userObj['username']
+            password =  userObj['password']
+            if not (User.objects.filter(username=username).exists()):
+                User.objects.create_user(username,password)
+                user = authenticate(username = username, password = password)
+                login(request, user)
+                return HttpResponseRedirect(LOGIN_REDIRECT_URL)
+            else:
+                raise forms.ValidationError('Looks like a username with that email or password already exists')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'app/register.html', {'form' : form})
 
 def todo_list(request):
     tasks = Todo.objects.filter(created_date__lte=timezone.now()).order_by('created_date')

@@ -8,8 +8,13 @@
     <div class="page-header">
         <h1><a href="/">Django To-do List</a></h1>
     </div>
+    {% if user.is_authenticated %}
     <div class="content container">
-        <a href="{% url 'todo_new' %}" class="top-menu">Create New</a>
+        <div class="new_button">
+            <a href="{% url 'todo_new' %}">Create New</a>
+            <a href="{% url 'todo_list' %}">Show Tasks</a>
+            <a href="/logout/">Logout</a>
+        </div>
         <div class="row">
             <div class="col-md-8">
             {% block content %}
@@ -17,5 +22,8 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <h2><a href="/login/">Click to go to Login Page</a></h2>
+    {% endif %}
 </body>
 </html>
